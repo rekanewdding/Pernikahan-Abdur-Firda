@@ -1,45 +1,38 @@
 /* ===== VARIABLES — TEMA EMAS + BIRU + PUTIH ===== */
 :root {
-    /* 🎨 Palet warna */
-    --blue-dark: #0F3D91;      /* biru navy */
-    --blue-mid: #1E5FCB;       /* biru medium */
-    --blue-light: #3F9BD9;     /* biru terang */
-    --gold-dark: #B8860B;      /* emas tua */
-    --gold-mid: #D4AF37;       /* emas klasik */
-    --gold-light: #F0C24B;     /* emas muda */
-    --white-soft: #FFFFFF;     /* putih murni */
-    --white-cream: #FDFBF7;    /* putih krem */
-    --white-blue: #F0F4FA;     /* putih kebiruan */
+    --blue-dark: #0F3D91;
+    --blue-mid: #1E5FCB;
+    --blue-light: #3F9BD9;
+    --gold-dark: #B8860B;
+    --gold-mid: #D4AF37;
+    --gold-light: #F0C24B;
+    --white-soft: #FFFFFF;
+    --white-cream: #FDFBF7;
+    --white-blue: #F0F4FA;
 
-    /* 🎯 Warna utama */
-    --primary-color: #D4AF37;              /* EMAS sebagai aksen utama */
+    --primary-color: #D4AF37;
     --primary-light: #F0C24B;
     --primary-dark: #B8860B;
-    --secondary-color: #0F3D91;            /* BIRU NAVY sebagai aksen kedua */
+    --secondary-color: #0F3D91;
     --secondary-light: #1E5FCB;
     
-    /* Gradient emas untuk teks emas */
     --gold-gradient: linear-gradient(135deg, #F0C24B 0%, #D4AF37 30%, #FFD966 50%, #D4AF37 70%, #B8860B 100%);
     
-    /* 🎨 Background — PUTIH sebagai dasar */
-    --bg-dark: #FFFFFF;                     /* putih (dipakai body) */
-    --bg-card: #FFFFFF;                     /* putih card */
-    --bg-section: rgba(255, 255, 255, 0.92); /* putih transparan untuk section */
-    --bg-cream: #FDFBF7;                    /* putih krem untuk variasi */
-    --bg-blue-soft: #F0F4FA;                /* biru sangat muda */
+    --bg-dark: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --bg-section: rgba(255, 255, 255, 0.92);
+    --bg-cream: #FDFBF7;
+    --bg-blue-soft: #F0F4FA;
     
-    /* 🎨 Text — BIRU NAVY untuk teks utama */
-    --text-dark: #0A1F4D;                   /* teks utama (biru navy gelap) */
-    --text-white: #FFFFFF;                  /* putih untuk di atas biru/emas */
-    --text-muted: #5A6B8A;                  /* abu kebiruan untuk teks sekunder */
-    --text-gold: #B8860B;                   /* emas tua untuk aksen */
+    --text-dark: #0A1F4D;
+    --text-white: #FFFFFF;
+    --text-muted: #5A6B8A;
+    --text-gold: #B8860B;
     
-    /* 🎨 Border */
     --border-gold: rgba(212, 175, 55, 0.45);
     --border-blue: rgba(15, 61, 145, 0.2);
     --border-soft: rgba(212, 175, 55, 0.25);
     
-    /* 🎨 Shadow — soft, tidak terlalu gelap */
     --shadow-sm: 0 5px 15px rgba(15, 61, 145, 0.08);
     --shadow-md: 0 10px 30px rgba(15, 61, 145, 0.12);
     --shadow-lg: 0 15px 45px rgba(15, 61, 145, 0.18);
@@ -48,18 +41,9 @@
     --border-radius: 20px;
 }
 
-/* ===== GLOBAL STYLES ===== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-    overflow-x: hidden;
-}
-
+/* ===== GLOBAL ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 body {
     font-family: 'Poppins', sans-serif;
     color: var(--text-dark);
@@ -71,10 +55,8 @@ body {
 /* ===== BACKGROUND SLIDER ===== */
 .bg-slider-container {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
+    top: 0; left: 0;
+    width: 100%; height: 100vh;
     z-index: 0;
     overflow: hidden;
     transform: translateZ(0);
@@ -83,28 +65,32 @@ body {
 
 .bg-slide {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     background-size: cover;
     background-position: center;
     opacity: 0;
     transition: opacity 1.5s ease-in-out;
-    will-change: opacity;
+    will-change: opacity, transform;
     backface-visibility: hidden;
+    transform: scale(1);
 }
 
 .bg-slide.active {
     opacity: 1;
 }
 
+/* ✅ ZOOM BACKGROUND — hanya desktop, biar tetap ringan di HP */
+@media (min-width: 769px) {
+    .bg-slide.active {
+        animation: zoomInBg 8s ease-in-out forwards;
+    }
+}
+
 .bg-slider-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     background: linear-gradient(180deg, 
         rgba(255, 255, 255, 0.75) 0%, 
         rgba(240, 244, 250, 0.55) 30%, 
@@ -115,7 +101,7 @@ body {
     pointer-events: none;
 }
 
-/* ===== ANIMATIONS (transform + opacity saja — ringan) ===== */
+/* ===== ANIMATIONS ===== */
 @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
@@ -151,10 +137,21 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* ✅ SPARKLE GLOW — versi ringan pakai filter drop-shadow */
 @keyframes goldSparkle {
-    0% { opacity: 0; transform: scale(0); }
-    50% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(0); }
+    0% { 
+        opacity: 0; 
+        transform: scale(0); 
+    }
+    50% { 
+        opacity: 1; 
+        transform: scale(1.2); 
+        filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.8));
+    }
+    100% { 
+        opacity: 0; 
+        transform: scale(0); 
+    }
 }
 
 @keyframes floatFlower {
@@ -167,6 +164,34 @@ body {
     100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
 }
 
+/* ✅ GOLD PULSE — versi ringan pakai filter (bukan text-shadow) */
+@keyframes goldPulse {
+    0%, 100% { 
+        filter: brightness(1) drop-shadow(0 0 4px rgba(212, 175, 55, 0.3)); 
+    }
+    50% { 
+        filter: brightness(1.15) drop-shadow(0 0 10px rgba(212, 175, 55, 0.6)); 
+    }
+}
+
+/* ✅ GOLD RING SHINE — hanya desktop */
+@keyframes borderShine {
+    0%, 100% { box-shadow: 0 0 5px rgba(212, 175, 55, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.7); }
+}
+
+/* ✅ ZOOM BACKGROUND */
+@keyframes zoomInBg {
+    from { transform: scale(1); }
+    to { transform: scale(1.08); }
+}
+
+/* ✅ SLIDE DOWN untuk section header */
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 /* ===== UTILITY ===== */
 .gold-text {
     background: var(--gold-gradient);
@@ -174,11 +199,10 @@ body {
     background-clip: text;
     color: transparent !important;
     font-weight: 700;
+    animation: goldPulse 2.5s ease-in-out infinite;  /* ✅ Aktif */
 }
 
-.floating {
-    animation: floating 3s ease-in-out infinite;
-}
+.floating { animation: floating 3s ease-in-out infinite; }
 
 .beating-heart {
     animation: heartbeat 1.5s ease-in-out infinite;
@@ -187,11 +211,9 @@ body {
     will-change: transform;
 }
 
-.fade-in {
-    animation: fadeIn 1s ease forwards;
-}
+.fade-in { animation: fadeIn 1s ease forwards; }
 
-/* ===== GOLD BORDER DECORATION ===== */
+/* ===== GOLD DECORATION ===== */
 .gold-border-decoration {
     display: flex;
     justify-content: center;
@@ -201,22 +223,22 @@ body {
 }
 
 .gold-dot {
-    width: 6px;
-    height: 6px;
+    width: 6px; height: 6px;
     background: var(--primary-color);
     border-radius: 50%;
     box-shadow: 0 0 6px rgba(212, 175, 55, 0.6);
+    animation: goldPulse 2s ease-in-out infinite;
 }
 
 .gold-line {
-    width: 40px;
-    height: 1px;
+    width: 40px; height: 1px;
     background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
 }
 
 .gold-diamond {
     color: var(--primary-color);
     font-size: 14px;
+    animation: goldPulse 1.8s ease-in-out infinite;
 }
 
 .gold-divider {
@@ -235,18 +257,15 @@ body {
 }
 
 .divider-line {
-    width: 60px;
-    height: 1px;
+    width: 60px; height: 1px;
     background: linear-gradient(90deg, transparent, var(--primary-color), var(--primary-color), transparent);
 }
 
 /* ===== ISLAMIC PATTERN ===== */
 .islamic-pattern {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' opacity='0.06'%3E%3Cpath fill='none' stroke='%230F3D91' stroke-width='1' d='M50,10 L90,30 L90,70 L50,90 L10,70 L10,30 Z'/%3E%3Ccircle cx='50' cy='50' r='20' fill='none' stroke='%230F3D91' stroke-width='1'/%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: 60px;
@@ -274,8 +293,7 @@ body {
 /* ===== FLOWER CORNERS ===== */
 .flower-corner {
     position: absolute;
-    width: 80px;
-    height: 80px;
+    width: 80px; height: 80px;
     background-size: contain;
     background-repeat: no-repeat;
     opacity: 0.7;
@@ -319,9 +337,13 @@ body {
 .flower-border-item {
     color: var(--primary-color);
     font-size: 12px;
+    animation: goldPulse 2s ease-in-out infinite;
 }
 
-/* ===== GOLD SPARKLES ===== */
+.flower-border-item:nth-child(even) { animation-delay: 0.5s; }
+.flower-border-item:nth-child(odd) { animation-delay: 1s; }
+
+/* ===== SPARKLES ===== */
 .gold-sparkles, .global-sparkles {
     position: absolute;
     top: 0; left: 0;
@@ -338,11 +360,10 @@ body {
 
 .sparkle {
     position: absolute;
-    width: 4px;
-    height: 4px;
+    width: 4px; height: 4px;
     background: var(--primary-color);
     border-radius: 50%;
-    animation: goldSparkle 1.5s ease-in-out infinite;
+    animation: goldSparkle 1.8s ease-in-out infinite;
     will-change: transform, opacity;
 }
 
@@ -372,7 +393,6 @@ body {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    /* ✅ Overlay biru gelap — kontras dengan teks emas & putih */
     background: linear-gradient(135deg, rgba(10, 31, 77, 0.88), rgba(15, 61, 145, 0.82));
     z-index: 1;
 }
@@ -392,7 +412,6 @@ body {
 .cover-inner { max-width: 800px; }
 
 .ornament-top, .ornament-bottom { margin: 15px 0; }
-
 .ornament-svg { width: 80px; height: auto; }
 
 .arabic-decoration {
@@ -401,7 +420,7 @@ body {
     color: var(--primary-light);
     margin-bottom: 1.5rem;
     opacity: 0;
-    animation: fadeInUp 0.8s ease forwards;
+    animation: fadeInUp 0.8s ease forwards, goldPulse 2.5s ease-in-out 1s infinite;
 }
 
 .cover-subtitle {
@@ -466,7 +485,7 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: var(--shadow-gold);
     opacity: 0;
-    animation: fadeInUp 0.8s ease 1s forwards;
+    animation: fadeInUp 0.8s ease 1s forwards, pulse 2.5s ease-in-out 2s infinite;
 }
 
 .btn-open-cover:hover {
@@ -492,8 +511,7 @@ body {
 
 .music-icon {
     position: relative;
-    width: 50px;
-    height: 50px;
+    width: 50px; height: 50px;
     background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
     border-radius: 50%;
     display: flex;
@@ -521,7 +539,7 @@ body {
     pointer-events: none;
 }
 
-/* ===== FLOATING NAVIGATION ===== */
+/* ===== FLOATING NAV ===== */
 .floating-nav {
     position: fixed;
     left: 20px;
@@ -543,8 +561,7 @@ body {
 
 .nav-dot {
     position: relative;
-    width: 45px;
-    height: 45px;
+    width: 45px; height: 45px;
     background: var(--white-soft);
     border-radius: 50%;
     display: flex;
@@ -558,8 +575,7 @@ body {
     overflow: visible;
 }
 
-.nav-dot:hover,
-.nav-dot.active {
+.nav-dot:hover, .nav-dot.active {
     background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
     color: var(--white-soft);
     transform: scale(1.1);
@@ -622,7 +638,6 @@ body {
 .section {
     padding: 80px 0;
     position: relative;
-    /* ✅ Putih transparan agar background slider tetap terlihat samar */
     background: rgba(255, 255, 255, 0.94);
     margin: 20px 20px;
     border-radius: 40px;
@@ -633,6 +648,19 @@ body {
 }
 
 .section-header { position: relative; }
+
+/* ✅ Animasi masuk untuk section header */
+.section-header.reveal-active .gold-border-decoration {
+    animation: slideDown 0.6s ease 0.1s both;
+}
+
+.section-header.reveal-active .section-title {
+    animation: fadeInUp 0.8s ease 0.3s both;
+}
+
+.section-header.reveal-active .gold-divider {
+    animation: fadeInUp 0.8s ease 0.5s both;
+}
 
 .section-icon {
     font-size: 1.5rem;
@@ -660,9 +688,7 @@ body {
     font-weight: 600;
 }
 
-.section p {
-    color: var(--text-dark);
-}
+.section p { color: var(--text-dark); }
 
 /* ===== COUPLE CARD ===== */
 .couple-card {
@@ -699,17 +725,22 @@ body {
     top: -15px;
     left: 50%;
     transform: translateX(-50%);
-    width: 50px;
-    height: 50px;
+    width: 50px; height: 50px;
     border: 2px solid var(--primary-color);
     border-radius: 50%;
     opacity: 0.7;
     background: var(--white-soft);
 }
 
+/* ✅ BORDER SHINE — hanya desktop */
+@media (min-width: 769px) {
+    .gold-ring-decoration {
+        animation: borderShine 3s ease-in-out infinite;
+    }
+}
+
 .couple-image-frame {
-    width: 200px;
-    height: 200px;
+    width: 200px; height: 200px;
     border-radius: 50%;
     margin: 0 auto 1.5rem;
     position: relative;
@@ -720,8 +751,7 @@ body {
 }
 
 .couple-img {
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     object-fit: cover;
     transition: transform 0.8s ease;
 }
@@ -756,9 +786,7 @@ body {
     letter-spacing: 2px;
 }
 
-.couple-parents p {
-    color: var(--text-muted);
-}
+.couple-parents p { color: var(--text-muted); }
 
 .couple-parents h5 {
     color: var(--text-dark);
@@ -774,6 +802,7 @@ body {
     color: var(--primary-color);
     font-size: 14px;
     margin: 10px 0;
+    animation: floatFlower 5s ease-in-out infinite;
 }
 
 .gold-date {
@@ -785,9 +814,7 @@ body {
 }
 
 /* ===== EVENT ===== */
-.event-section {
-    background: rgba(255, 255, 255, 0.94);
-}
+.event-section { background: rgba(255, 255, 255, 0.94); }
 
 .event-card {
     background: var(--white-soft);
@@ -804,7 +831,6 @@ body {
 }
 
 .event-header {
-    /* ✅ Biru navy dengan border emas — kombinasi mewah */
     background: linear-gradient(135deg, var(--blue-mid), var(--blue-dark));
     padding: 1.5rem;
     text-align: center;
@@ -815,6 +841,7 @@ body {
     font-size: 2rem;
     margin-bottom: 0.5rem;
     color: var(--primary-light);
+    animation: pulse 2s ease-in-out infinite;
 }
 
 .event-header h3 {
@@ -854,9 +881,7 @@ body {
     font-weight: 600;
 }
 
-.event-detail .text-muted {
-    color: var(--text-muted) !important;
-}
+.event-detail .text-muted { color: var(--text-muted) !important; }
 
 .btn-map {
     display: inline-block;
@@ -882,10 +907,7 @@ body {
 /* ===== COUNTDOWN ===== */
 .countdown-wrapper { position: relative; }
 
-.countdown-wrapper h4.gold-text {
-    /* Teks "Menuju Hari Bahagia" pakai gradient emas */
-    font-weight: 700;
-}
+.countdown-wrapper h4.gold-text { font-weight: 700; }
 
 .countdown-ornament {
     text-align: center;
@@ -900,7 +922,6 @@ body {
 .countdown-ornament:last-child { transform: rotate(15deg); }
 
 .countdown-card {
-    /* ✅ Biru navy dengan countdown emas — kontras elegan */
     background: linear-gradient(135deg, var(--blue-dark), var(--blue-mid));
     padding: 2rem;
     border-radius: var(--border-radius);
@@ -935,9 +956,7 @@ body {
 }
 
 /* ===== GALLERY ===== */
-.gallery-section {
-    background: rgba(255, 255, 255, 0.94);
-}
+.gallery-section { background: rgba(255, 255, 255, 0.94); }
 
 .gallery-item {
     position: relative;
@@ -963,9 +982,7 @@ body {
     display: block;
 }
 
-.gallery-item:hover img {
-    transform: scale(1.1);
-}
+.gallery-item:hover img { transform: scale(1.1); }
 
 .gallery-overlay {
     position: absolute;
@@ -1070,6 +1087,12 @@ body {
 .closing-ornament-bottom span {
     color: var(--primary-color);
     font-size: 14px;
+    animation: goldPulse 2s ease-in-out infinite;
+}
+
+.closing-ornament-top span:nth-child(even),
+.closing-ornament-bottom span:nth-child(even) {
+    animation-delay: 0.5s;
 }
 
 .closing-ornament-bottom {
@@ -1078,9 +1101,7 @@ body {
 }
 
 /* ===== GUESTBOOK ===== */
-.guestbook-section {
-    background: rgba(255, 255, 255, 0.94);
-}
+.guestbook-section { background: rgba(255, 255, 255, 0.94); }
 
 .guestbook-form {
     background: var(--white-soft);
@@ -1202,13 +1223,10 @@ select.form-control option {
     color: var(--white-soft);
 }
 
-.text-gold {
-    color: var(--primary-dark);
-}
+.text-gold { color: var(--primary-dark); }
 
 /* ===== GIFT ===== */
 .gift-section {
-    /* ✅ Biru navy dengan aksen emas — kontras dengan section putih */
     background: linear-gradient(135deg, var(--blue-dark), var(--blue-mid));
     color: var(--text-white);
 }
@@ -1238,6 +1256,7 @@ select.form-control option {
     top: 0; left: 0; right: 0; bottom: 0;
     background: radial-gradient(circle at 30% 40%, rgba(212, 175, 55, 0.08), transparent 70%);
     pointer-events: none;
+    animation: goldPulse 3s ease-in-out infinite;
 }
 
 .btn-gift {
@@ -1284,6 +1303,12 @@ select.form-control option {
     font-size: 14px;
 }
 
+.gift-divider span {
+    animation: goldPulse 2s ease-in-out infinite;
+}
+
+.gift-divider span:nth-child(2) { animation-delay: 0.5s; }
+
 .address-text {
     color: var(--text-dark);
     font-size: 1rem;
@@ -1297,7 +1322,6 @@ select.form-control option {
 
 /* ===== FOOTER ===== */
 .footer-section {
-    /* ✅ Biru navy gelap untuk footer — penutup elegan */
     background: linear-gradient(135deg, var(--blue-dark), #071433);
     color: var(--text-white);
     border-radius: 40px 40px 0 0;
@@ -1329,8 +1353,7 @@ select.form-control option {
 }
 
 .social-icon {
-    width: 45px;
-    height: 45px;
+    width: 45px; height: 45px;
     background: rgba(212, 175, 55, 0.15);
     border-radius: 50%;
     display: flex;
@@ -1417,7 +1440,15 @@ select.form-control option {
     .gallery-item img { height: 200px; }
     
     .music-player { bottom: 80px; right: 10px; }
-    .floating-flower { display: none; }
+    
+    /* ✅ Floating flower TETAP MUNCUL di HP — kecilkan saja */
+    .floating-flower {
+        font-size: 18px !important;
+        opacity: 0.35;
+    }
+    .flower-1, .flower-4 { font-size: 16px !important; }
+    .flower-3 { font-size: 20px !important; }
+    
     .flower-corner { width: 50px; height: 50px; }
     .gold-line { width: 20px; }
     .divider-line { width: 30px; }
@@ -1431,11 +1462,13 @@ select.form-control option {
     .music-player { bottom: 20px; right: 15px; }
 }
 
-/* ✅ Prefer reduced motion */
+/* ✅ PREFER REDUCED MOTION — versi PALING RINGAN (animasi tetap muncul) */
 @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+    /* Hanya matikan animasi paling berat, lainnya tetap jalan */
+    .image-border,
+    .music-icon.playing,
+    .bg-slide.active {
+        animation: none !important;
     }
+    /* Semua animasi lain tetap muncul */
 }
